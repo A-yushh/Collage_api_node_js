@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-dbUrl='input Your String'
+dbUrl='mongodb+srv://ayushpatelid:ayushpatelid@cluster0.sxnhmoq.mongodb.net/GitSignUpSignIn'
 
 const connectDb = async () => {
     try {
