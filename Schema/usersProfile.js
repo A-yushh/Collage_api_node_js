@@ -10,10 +10,6 @@ const creatUesrsProfile = mongoose.Schema({
     type: "string",
     required:true,
   },
-  email: {
-    type: "string",
-    required:true,
-  },
   address:{
     type:"string",
     required:true,

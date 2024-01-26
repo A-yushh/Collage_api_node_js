@@ -2,22 +2,33 @@ const userProfile = require("../Schema/usersProfile");
 const jwt = require("jsonwebtoken");
 exports.creatUserProfile = async (req, res) => {
   try {
-    const { firstName, lastName, email, address, userId } = req.body;
-    const response = await userProfile.create({
-      firstName,
-      lastName,
-      email,
-      address,
-      userId,
-    });
-    res.status(200).json({
-      success: "true",
-      data: response,
-      Message: "Profile Create Successfully",
-    });
+    const { firstName, lastName, address} = req.body;
+    const tokenHeader = req.headers.authorization;
+    const fromHeader = tokenHeader.split(' ')[1];
+    const secretKey = "Ayush";
+    const varifyToken = jwt.verify(fromHeader, secretKey);
+    const userId=varifyToken.userId;
+    console.log(varifyToken);
+    if(varifyToken){
+      const response = await userProfile.create({
+        firstName,
+        lastName,
+        address,
+        userId,
+      });
+      res.status(200).json({
+        success: "true",
+        data: response,
+        Message: "Profile Create Successfully",
+      });
+
+    }
+    
+    
   } catch (err) {
     res.status(500).json({
       success: "false",
+      Message: "you can't  Create profile try again",
     });
   }
 };
@@ -36,7 +47,7 @@ exports.getUserProfile = async (req, res) => {
     const limit = req.query.limit;
 
     // Get Token from cookie and headers
-    const token = req.cookies.token;
+    // const token = req.cookies.token;
     const tokenHeader = req.headers.authorization;
     const fromHeader = tokenHeader.split(' ')[1];
     console.log(token);
