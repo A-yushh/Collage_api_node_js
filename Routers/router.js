@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {creatUser,loginUser} = require('../Controller/usersController');
 const {creatUserProfile,getUserProfile,getAllUsers} =require('../Controller/usersProfileController')
-const{creatQuestion}=require('../Controller/devloperTestController')
+// const{creatQuestion}=require('../Controller/devloperTestController')
 const {auth, student,admin} = require("../Middleware/auth");
 
 router.post('/signup',creatUser);
