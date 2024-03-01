@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const dotenv=require("dotenv");
+dotenv.config();
 
 exports.auth = (req, res, next) => {
   // const cookieToken = req.cookies.token;
@@ -15,7 +17,7 @@ exports.auth = (req, res, next) => {
         message: "Token Missing",
       });
     }
-    const JWT_SECRET = "Ayush";
+    const JWT_SECRET = process.env.SECRET_KEY;
     try {
       const varifyToken = jwt.verify(fromHeader, JWT_SECRET);
       console.log("myhh ", varifyToken);

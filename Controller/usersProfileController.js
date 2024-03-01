@@ -1,11 +1,13 @@
+const dotenv = require('dotenv');
 const userProfile = require("../Schema/usersProfile");
 const jwt = require("jsonwebtoken");
+dotenv.config();
 exports.creatUserProfile = async (req, res) => {
   try {
     const { firstName, lastName, address} = req.body;
     const tokenHeader = req.headers.authorization;
     const fromHeader = tokenHeader.split(' ')[1];
-    const secretKey = "Ayush";
+    const secretKey = process.env.SECRET_KEY;
     const varifyToken = jwt.verify(fromHeader, secretKey);
     const userId=varifyToken.userId;
     console.log(varifyToken);
@@ -54,7 +56,7 @@ exports.getUserProfile = async (req, res) => {
     console.log("header token",fromHeader);
 
     // Decode token and Varify its
-    const secretKey = "Ayush";
+    const secretKey = process.env.SECRET_KEY;
     const varifyToken = jwt.verify(token, secretKey);
     console.log(varifyToken);
 

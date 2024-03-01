@@ -1,6 +1,8 @@
 const user = require("../Schema/users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const dotenv=require('dotenv');
+dotenv.config();
 // const userProfile = require('../Schema/usersProfile');
 
 exports.creatUser = async (req, res) => {
@@ -68,7 +70,7 @@ exports.loginUser = async (req, res) => {
         message: "Invalid password",
       });
     } else {
-      const secretKey = "Ayush";
+      const secretKey = process.env.SECRET_KEY;
       const payload = {
         userId: findUser.id,
         useremail: findUser.email,

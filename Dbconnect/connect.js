@@ -1,5 +1,8 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const mongoose = require('mongoose');
-dbUrl='mongodb+srv://ayushpatelid:ayushpatelid@cluster0.sxnhmoq.mongodb.net/GitSignUpSignIn'
+dbUrl=process.env.DB_URL;
 
 const connectDb = async () => {
     try {
